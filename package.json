@@ -1,0 +1,24 @@
+{
+  "name": "psycho-task",
+  "version": "1.0.0",
+  "description": "task manager",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SHUYE-PPSHA/PSYCHO-TASK.git"
+  },
+  "keywords": [
+    "task",
+    "manager"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SHUYE-PPSHA/PSYCHO-TASK/issues"
+  },
+  "homepage": "https://github.com/SHUYE-PPSHA/PSYCHO-TASK#readme"
+}
