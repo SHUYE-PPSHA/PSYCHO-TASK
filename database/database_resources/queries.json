@@ -1,0 +1,13 @@
+{ "User.addUser" : "INSERT INTO Users VALUES (default, $1, $2, $3, $4);",
+  "User.getUserInfo" : "SELECT * FROM Users WHERE user_id = $1;",
+  "User.getUsers" : "SELECT * FROM Users;",
+  "User.setMaxWorkingTime" : "UPDATE Users SET max_working_time = $2 WHERE user_id = $1;",
+  "User.getUserTasks" : "SELECT user_id, Tasks.task_id, Tasks.name, time_spent FROM User_Tasks INNER JOIN Tasks ON User_Tasks.task_id = Tasks.task_id WHERE User_Tasks.user_id = $1;",
+  "Task.getTaskInfo" : "SELECT * FROM Tasks WHERE task_id = $1;",
+  "Task.setTaskStatus" : "UPDATE Tasks SET status = $2 WHERE task_id = $1;",
+  "Task.addTask" : "INSERT INTO Tasks VALUES (default, $1, $2, $3, $4, $5);",
+  "Task.getTaskUsers" : "SELECT task_id, Users.user_id, Users.name, Users.surname, time_spent FROM User_Tasks INNER JOIN Users ON User_Tasks.user_id = Users.user_id WHERE User_Tasks.task_id = $1;",
+  "TaskStatus.getStatuses" : "SELECT * FROM Task_Status;",
+  "TaskStatus.addNewStatus" : "INSERT INTO Task_Status VALUES ($1, $2);",
+  "User.joinToTask" : "INSERT INTO User_Tasks VALUES ($1, $2, $3);"
+}
