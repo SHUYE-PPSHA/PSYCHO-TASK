@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/SHUYE-PPSHA/PSYCHO-TASK/issues"
   },
-  "homepage": "https://github.com/SHUYE-PPSHA/PSYCHO-TASK#readme"
+  "homepage": "https://github.com/SHUYE-PPSHA/PSYCHO-TASK#readme",
+  "dependencies": {
+    "pg": "^8.6.0"
+  }
 }
