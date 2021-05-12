@@ -2,6 +2,7 @@
 
 const http = require('http');
 const fs = require('fs');
+const scripts = require('./scripts.js');
 
 const receiveLogin = async req => new Promise(resolve => {
   const body = [];
@@ -17,7 +18,6 @@ const receiveLogin = async req => new Promise(resolve => {
 const getBody = buffer => {
   const html = buffer.toString();
   const from = html.indexOf('<body>') + 6;
-
   const to = html.lastIndexOf('</body>');
   return html.substring(from, to);
 }
@@ -27,12 +27,25 @@ const httpError = (res, status, message) => {
   res.end(`"${message}"`);
 };
 
+console.log(scripts);
+
 http.createServer(async (req, res) => {
-  const url = req.url === '/' ? '/index.html' : req.url;
-  const path = `./static${url}`;
+  const url = req.url === '/' ? '/html/index.html' : req.url;
+  console.log(url);
+  const [ first, second ] = url.substring(1).split('/');
+  const path = `./static/${first}/${second}`;
+  console.log(path);
   try {
-    let data = await fs.promises.readFile(path);
-    if (url !== '/index.html' && path.includes('html')) {
+    let data;
+    if (first === 'getScripts') {
+      const [ htmlName ] = second.split('.');
+      console.log(htmlName);
+      data = scripts[htmlName];
+      data = JSON.stringify(data);
+    } else {
+      data = await fs.promises.readFile(path);
+    }
+    if (second !== 'index.html' && path.includes('.html') && first !== 'getScripts') {
       data = getBody(data);
       data = JSON.stringify(data);
     }
