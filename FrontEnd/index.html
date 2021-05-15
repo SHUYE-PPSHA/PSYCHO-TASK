@@ -11,7 +11,7 @@
 
   <div class="topnav">
     <a class="active" href="#home">Home</a>
-    <a href="#tasks">Tasks</a>
+    <a href="#new task" onclick="document.getElementById('id03').style.display='block'">New task</a>
     <a href="#calendar">Calendar</a>
     <a href="#notifications">Notifications</a>
     <a href="#login" onclick="document.getElementById('id01').style.display='block'">Login</a>
@@ -74,6 +74,31 @@
         <button type="submit" class="signup">Sign Up</button>
       </div>
     </div>
+  </form>
+</div>
+
+<div id="id03" class="modal">
+  <span onclick="document.getElementById('id03').style.display='none'"
+class="close" title="Close Modal">&times;</span>
+
+  <form class="modal-content animate" action="/action_page.php">
+
+    <div class="container">
+      <label for="uname"><b>Name of a task</b></label>
+      <input type="text" placeholder="Enter a name" name="uname" required>
+
+      <label for="psw"><b>Priority</b></label>
+      <input type="number" placeholder="Enter a number" name="psw" required>
+
+      <label for="psw"><b>Deadline</b></label>
+      <input type="date" placeholder="Enter a date" name="psw" required>
+
+      <button type="submit">Create</button>
+
+    <div class="clearfix">
+      <button type="button" onclick="document.getElementById('id03').style.display='none'" class="cancelbtn">Cancel</button>
+    </div>
+  </div>
   </form>
 </div>
 
