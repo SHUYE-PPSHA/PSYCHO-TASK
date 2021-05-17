@@ -3,32 +3,62 @@
 const pool = require('./pool.js');
 const queries = require('./database_resources/queries.json');
 
+class Database {
+  constructor(pool) {
+    this.pool = pool;
+    this.user = new User(pool);
+    this.task = new Task(pool);
+    this.taskStatus = new TaskStatus(pool);
+  }
+
+  async initialization(sqlScript) {
+    await this.pool.query(sqlScript);
+  }
+
+  close() {
+    this.pool.end();
+  }
+}
+
 class User {
-  static async addUser(name, surname, password, maxWorkingTime) {
+  constructor(pool) {
+    this.pool = pool;
+  }
+
+  async addUser(name, surname, password, maxWorkingTime) {
+    if (maxWorkingTime < 0) {
+      throw new Error('User max working time must be greater than or equal to 0');
+    }
     try {
       const query = queries['User.addUser'];
-      const result = await pool.query(query, [name, surname, password, maxWorkingTime]);
+      const result = await this.pool.query(query, [name, surname, password, maxWorkingTime]);
       console.log(result);
     } catch (error) {
       console.log(error);
     }
   }
 
-  static async getUserInfo(userId) {
+  async getUserInfo(userId) {
+    if (typeof userId !== 'number') {
+      throw new Error('Number expected');
+    }
+    if (userId < 1) {
+      throw new Error('User ID must be greater than or equal to 1');
+    }
+
     try {
       const query = queries['User.getUserInfo'];
-      const result = await pool.query(query, [userId]);
-      console.log(result.rows);
+      const result = await this.pool.query(query, [userId]);
       return result.rows;
     } catch (error) {
       console.log(error);
     }
   }
 
-  static async getUsers() {
+  async getUsers() {
     try {
       const query = queries['User.getUsers'];
-      const result = await pool.query(query);
+      const result = await this.pool.query(query);
       console.log(result.rows);
       return result.rows;
     } catch (error) {
@@ -36,20 +66,27 @@ class User {
     }
   }
 
-  static async setMaxWorkingTime(userId, time) {
+  async setMaxWorkingTime(userId, time) {
+    if (typeof time !== 'number') {
+      throw new Error('Number expected');
+    }
+    if (time <= 0) {
+      throw new Error('The time spent cannot be less than 0');
+    }
+
     try {
       const query = queries['User.setMaxWorkingTime'];
-      const result = await pool.query(query, [userId, time]);
+      const result = await this.pool.query(query, [userId, time]);
       console.log(result);
     } catch (error) {
       console.log(error);
     }
   }
 
-  static async getUserTasks(userId) {
+  async getUserTasks(userId) {
     try {
       const query = queries['User.getUserTasks'];
-      const result = await pool.query(query, [userId]);
+      const result = await this.pool.query(query, [userId]);
       console.log(result.rows);
       return result.rows;
     } catch (error) {
@@ -57,10 +94,14 @@ class User {
     }
   }
 
-  static async joinToTask(userId, taskId, timeSpent) {
+  async joinToTask(userId, taskId, timeSpent) {
+    if (timeSpent <= 0) {
+      throw new Error('The time spent cannot be less than 0');
+    }
+
     try {
       const query = queries['User.joinToTask'];
-      const result = await pool.query(query, [userId, taskId, timeSpent]);
+      const result = await this.pool.query(query, [userId, taskId, timeSpent]);
       console.log(result);
     } catch (error) {
       console.log(error);
@@ -69,21 +110,28 @@ class User {
 }
 
 class Task {
-  static async getTaskInfo(taskId) {
+  constructor(pool) {
+    this.pool = pool;
+  }
+
+  async getTaskInfo(taskId) {
+    if (!taskId) throw new Error();
     try {
       const query = queries['Task.getTaskInfo'];
-      const result = await pool.query(query, [taskId]);
+      const result = await this.pool.query(query, [taskId]);
       console.log(result.rows);
+      console.log(result);
       return result.rows;
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
+      //throw new Error(error.message)
     }
   }
 
-  static async getTaskUsers(taskId) {
+  async getTaskUsers(taskId) {
     try {
       const query = queries['Task.getTaskUsers'];
-      const result = await pool.query(query, [taskId]);
+      const result = await this.pool.query(query, [taskId]);
       console.log(result.rows);
       return result.rows;
     } catch (error) {
@@ -91,34 +139,41 @@ class Task {
     }
   }
 
-  static async setTaskStatus(taskId, statusId) {
+  async setTaskStatus(taskId, statusId) {
     try {
       const query = queries['Task.setTaskStatus'];
-      const result = await pool.query(query, [taskId, statusId]);
+      const result = await this.pool.query(query, [taskId, statusId]);
       console.log(result);
     } catch (error) {
       console.log(error);
     }
   }
 
-  static async addTask(name, descr, complexity, executionTime, status) {
+  async addTask(name, descr, complexity, executionTime, status) {
+    if (executionTime <= 0) {
+      throw new Error('The execution time cannot be less than 0');
+    }
+
     try {
       const query = queries['Task.addTask'];
-      const result = await pool.query(query, [name, descr, complexity, executionTime, status]);
+      const result = await this.pool.query(query, [name, descr, complexity, executionTime, status]);
       console.log(result);
     } catch (error) {
       console.log(error);
     }
   }
-
 
 }
 
 class TaskStatus {
-  static async getStatuses() {
+  constructor(pool) {
+    this.pool = pool;
+  }
+
+  async getStatuses() {
     try {
       const query = queries['TaskStatus.getStatuses'];
-      const result = await pool.query(query);
+      const result = await this.pool.query(query);
       console.log(result.rows);
       return result.rows;
     } catch (error) {
@@ -126,10 +181,14 @@ class TaskStatus {
     }
   }
 
-  static async addNewStatus(name) {
+  async addNewStatus(name) {
+    if (!name) {
+      throw new Error('Not empty string expected');
+    }
+
     try {
       const query = queries['TaskStatus.addNewStatus'];
-      const result = await pool.query(query, [name]);
+      const result = await this.pool.query(query, [name]);
       console.log(result);
     } catch (error) {
       console.log(error);
@@ -137,4 +196,4 @@ class TaskStatus {
   }
 }
 
-module.exports = { User, Task, TaskStatus };
+module.exports = { Database };
