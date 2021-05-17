@@ -8,6 +8,6 @@
   "Task.addTask" : "INSERT INTO Tasks VALUES (default, $1, $2, $3, $4, $5);",
   "Task.getTaskUsers" : "SELECT task_id, Users.user_id, Users.name, Users.surname, time_spent FROM User_Tasks INNER JOIN Users ON User_Tasks.user_id = Users.user_id WHERE User_Tasks.task_id = $1;",
   "TaskStatus.getStatuses" : "SELECT * FROM Task_Status;",
-  "TaskStatus.addNewStatus" : "INSERT INTO Task_Status VALUES ($1, $2);",
+  "TaskStatus.addNewStatus" : "INSERT INTO Task_Status VALUES (default, $1);",
   "User.joinToTask" : "INSERT INTO User_Tasks VALUES ($1, $2, $3);"
 }

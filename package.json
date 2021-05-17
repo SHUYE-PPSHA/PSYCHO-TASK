@@ -4,7 +4,7 @@
   "description": "task manager",
   "main": "server.js",
   "scripts": {
-    "test": "test",
+    "test": "npx mocha",
     "start": "node server.js"
   },
   "repository": {
@@ -23,5 +23,8 @@
   "homepage": "https://github.com/SHUYE-PPSHA/PSYCHO-TASK#readme",
   "dependencies": {
     "pg": "^8.6.0"
+  },
+  "devDependencies": {
+    "mocha": "^8.4.0"
   }
 }
