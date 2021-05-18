@@ -54,3 +54,5 @@ http.createServer(async (req, res) => {
     httpError(res, 404, 'File is not found');
   }
 }).listen(8000);
+
+module.exports = { getBody };
