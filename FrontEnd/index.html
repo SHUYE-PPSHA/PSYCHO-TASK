@@ -28,12 +28,12 @@
 
       <div class="container">
         <label for="uname"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="uname" required>
+        <input type="text1" placeholder="Enter Username" name="uname1" required>
 
         <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
+        <input type="password1" placeholder="Enter Password" name="psw1" required>
 
-        <button type="submit">Login</button>
+        <button type="submit1">Login</button>
         <label>
           <input type="checkbox" checked="checked" name="remember"> Remember me
         </label>
@@ -57,13 +57,16 @@
       <p>Please fill in this form to create an account.</p>
       <hr>
       <label for="email"><b>Email</b></label>
-      <input type="text" placeholder="Enter Email" name="email" required>
+      <input type="text2" placeholder="Enter Email" name="email2" required>
+
+      <label for="uname"><b>Username</b></label>
+      <input type="text2.2" placeholder="Enter Username" name="uname2" required>
 
       <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
+      <input type="password2" placeholder="Enter Password" name="psw2" required>
 
       <label for="psw-repeat"><b>Repeat Password</b></label>
-      <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+      <input type="password2.2" placeholder="Repeat Password" name="psw-repeat2" required>
 
       <label>
         <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
@@ -71,7 +74,8 @@
 
       <div class="clearfix">
         <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
-        <button type="submit" class="signup">Sign Up</button>
+        <button type="submit2" class="signup" onclick="signUp(document.getElementsByName('email2'),
+         document.getElementsByName('uname2'), document.getElementsByName('psw2'))">Sign Up</button>
       </div>
     </div>
   </form>
@@ -85,15 +89,15 @@ class="close" title="Close Modal">&times;</span>
 
     <div class="container">
       <label for="uname"><b>Name of a task</b></label>
-      <input type="text" placeholder="Enter a name" name="uname" required>
+      <input type="text3" placeholder="Enter a name" name="uname3" required>
 
       <label for="psw"><b>Priority</b></label>
-      <input type="number" placeholder="Enter a number" name="psw" required>
+      <input type="number3" placeholder="Enter a number from 1 to 5" name="psw3" required>
 
       <label for="psw"><b>Deadline</b></label>
-      <input type="date" placeholder="Enter a date" name="psw" required>
+      <input type="date3" placeholder="Enter a date" name="psw3" required>
 
-      <button type="submit">Create</button>
+      <button type="submit3">Create</button>
 
     <div class="clearfix">
       <button type="button" onclick="document.getElementById('id03').style.display='none'" class="cancelbtn">Cancel</button>
