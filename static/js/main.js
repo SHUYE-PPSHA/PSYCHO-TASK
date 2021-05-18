@@ -1,20 +1,31 @@
 'use strict';
 
-const modal1 = document.getElementById('id01');
-const modal2 = document.getElementById('id02');
-const modal3 = document.getElementById('id03');
+function dropDownFunction() {
+  document.getElementById('myDropDown').classList.toggle('show');
+}
 
-let accounts = [];
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
 
 class account {
   
-  async signUp(mail, usr, psswrd, repeatpsswrd) {
-    if ( typeof mail, usr, psswrd, repeatpsswrd !== 'string') 
+  async signUp(mail, usrName, usrSurName, psswrd, repeatpsswrd) {
+    if ( typeof mail, usrName, usrSurName, psswrd, repeatpsswrd !== 'string') 
     {
       throw new Error('Data has a wrong type');
     }
 
-    if (accounts.includes(mail || usr || psswrd) === true) 
+    if (accounts.includes(mail || psswrd) === true) 
     {
       throw new Error('This account already exist');
     }
@@ -23,10 +34,16 @@ class account {
     {
       throw new Error('Repeated password does not match the password')
     }
-
-    let acc = {email: mail, username: usr, password: psswrd, repeatedPassword: repeatpsswrd};
-    accounts.push[acc];
-    return accounts;
+    alert('Work in progress');
+    /*
+    let mail = userMail.nodeValue;
+    let usrName = userName.nodeValue;
+    let usrSurName = userSurname.nodeValue;
+    let psswrd = userPsswrd.nodeValue;
+    let repeatpsswrd = userSecPsswrd.nodeValue;
+    let acc = {mail, usrName, usrSurname, psswrd, repeatpsswrd};
+    let verse = acc;
+    */
   }
 
   async login (mail, usr, psswrd) {

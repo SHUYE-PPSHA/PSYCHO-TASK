@@ -30,4 +30,3 @@ INSERT INTO User_Tasks VALUES
   (4, 2, 125),
   (4, 4, 160),
   (5, 1, 140);
-

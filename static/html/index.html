@@ -5,129 +5,183 @@
       Задачник
     </title>
     <link rel="stylesheet" href="css/main.css"/>
+    <link rel="stylesheet" href="https://snipp.ru/cdn/jqueryui/1.12.1/jquery-ui.min.css">
+    <script src = "../js/main.js" type = "text/javascript"></script>
   </head>
   </header>
   <body>
 
   <div class="topnav">
     <a class="active" href="#home">Home</a>
-    <a href="#new task" onclick="document.getElementById('id03').style.display='block'">New task</a>
+    <a href="#new task" onclick="document.getElementById('taskAdd').style.display='block'">New task</a>
     <a href="#calendar">Calendar</a>
-    <a href="#notifications">Notifications</a>
-    <a href="#login" onclick="document.getElementById('id01').style.display='block'">Login</a>
-    <a href="#sign up" onclick="document.getElementById('id02').style.display='block'">Sign up</a>
+    <a class="right" href="#notifications">Notifications</a>
+    <a class="right" href="#login" onclick="document.getElementById('loginFrom').style.display='block'">Login</a>
+    <a class="right" href="#sign up" onclick="document.getElementById('SignUpForm').style.display='block'">Sign up</a>
+  </div>
+
+<!--Calendar form-->
+
+
+  <div class="calendar">
+    <div id="datepicker"></div>
+    <input type="hidden" id="datepicker_value">    
+   </div>
   </div>
 
 <!-- Login form -->
 
-  <div id="id01" class="modal">
-    <span onclick="document.getElementById('id01').style.display='none'"
+  <div id="loginFrom" class="modal">
+    <span onclick="document.getElementById('loginFrom').style.display='none'"
   class="close" title="Close Modal">&times;</span>
 
-    <form class="modal-content animate" action="/action_page.php">
+    <form class="modal-content">
 
       <div class="container">
-        <label for="uname"><b>Username</b></label>
-        <input type="text1" placeholder="Enter Username" name="uname1" required>
+        <p>
+        <label for="login"><b>Username</b></label>
+        <input type="textLog" placeholder="Enter Login" name="login" required>
+        </p>
 
-        <label for="psw"><b>Password</b></label>
-        <input type="password1" placeholder="Enter Password" name="psw1" required>
+        <p>
+        <label for="pswLog"><b>Password</b></label>
+        <input type="passwordLog" placeholder="Enter Password" name="pswLog" required>
+        </p>
 
-        <button type="submit1">Login</button>
+        <p>
+        <button type="submitLog" onclick="alert('This function is in progress')">Login</button>
+        </p>
+
+        <p>
         <label>
           <input type="checkbox" checked="checked" name="remember"> Remember me
         </label>
+        </p>
 
       <div class="clearfix">
-        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-        <span class="psw">Forgot <a href="#">password?</a></span>
+        <p>
+          <span class="pswLog"> Forgot <a href="#">password?</a></span>
+        </p>
+        <button type="button" onclick="document.getElementById('loginFrom').style.display='none'" class="cancelbtn">Cancel</button>
       </div>
     </div>
     </form>
   </div>
 
-<!-- Sign up form -->
+<!--Sign up form -->
 
-<div id="id02" class="modal">
-  <span onclick="document.getElementById('id02').style.display='none'"
+<div id="SignUpForm" class="modal">
+  <span onclick="document.getElementById('SignUpForm').style.display='none'"
   class="close" title="Close Modal">&times;</span>
-  <form class="modal-content animate" action="/action_page.php">
-    <div class="container">
+  <form class="modal-content">
+    <div class="container" style="width: fit-content;">
       <h1>Sign Up</h1>
       <p>Please fill in this form to create an account.</p>
       <hr>
-      <label for="email"><b>Email</b></label>
-      <input type="text2" placeholder="Enter Email" name="email2" required>
+      <label for="emailUp"><b>Email</b></label>
+      <input id="mailSignUp" type="textUp" placeholder="Enter Email" name="emailUp" required>
 
-      <label for="uname"><b>Username</b></label>
-      <input type="text2.2" placeholder="Enter Username" name="uname2" required>
+      <label for="nameUp"><b>Name</b></label>
+      <input id="nameSignUp" type="textUp2" placeholder="Enter Name" name="nameUp" required>
 
-      <label for="psw"><b>Password</b></label>
-      <input type="password2" placeholder="Enter Password" name="psw2" required>
+      <label for="surnameUp"><b>Name</b></label>
+      <input id="surnameSignUp" type="textUp3" placeholder="Enter Surname" name="surnameUp" required>
 
-      <label for="psw-repeat"><b>Repeat Password</b></label>
-      <input type="password2.2" placeholder="Repeat Password" name="psw-repeat2" required>
+      <label for="pswUp"><b>Password</b></label>
+      <input id="passSignUp" type="passwordUp" placeholder="Enter Password" name="pswUp" required>
+
+      <label for="psw-repeatUp"><b>Repeat Password</b></label>
+      <input id="repeatPassSignUp" type="passwordUp2" placeholder="Repeat Password" name="psw-repeatUp" required>
 
       <label>
         <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
       </label>
 
       <div class="clearfix">
-        <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
-        <button type="submit2" class="signup" onclick="signUp(document.getElementsByName('email2'),
-         document.getElementsByName('uname2'), document.getElementsByName('psw2'))">Sign Up</button>
+        <button type="button" onclick="document.getElementById('SignUpForm').style.display='none'" class="cancelbtn">Cancel</button>
+        <button type="submitUp" class="signup" onclick="alert('This function is in progress')">Sign Up</button>
       </div>
     </div>
   </form>
 </div>
 
-<div id="id03" class="modal">
-  <span onclick="document.getElementById('id03').style.display='none'"
+<!-- CreateTasks -->
+
+<div id="taskAdd" class="modal">
+  <span onclick="document.getElementById('taskAdd').style.display='none'"
 class="close" title="Close Modal">&times;</span>
 
-  <form class="modal-content animate" action="/action_page.php">
+  <form class="modal-content">
 
     <div class="container">
-      <label for="uname"><b>Name of a task</b></label>
-      <input type="text3" placeholder="Enter a name" name="uname3" required>
+      <label for="nameAdd"><b>Name of a task</b></label>
+      <input type="textAdd" placeholder="Enter a name" name="nameAdd" required>
 
-      <label for="psw"><b>Priority</b></label>
-      <input type="number3" placeholder="Enter a number from 1 to 5" name="psw3" required>
+      <label for="pswAdd"><b>Priority</b></label>
+      <input type="numberAdd" placeholder="Enter a number from 1 to 5" name="pswAdd" required>
 
-      <label for="psw"><b>Deadline</b></label>
-      <input type="date3" placeholder="Enter a date" name="psw3" required>
+      <label for="pswAdd"><b>Deadline</b></label>
+      <input type="dateAdd" placeholder="Enter a date" name="pswAdd" required>
 
-      <button type="submit3">Create</button>
+      <button type="submitAdd">Create</button>
 
     <div class="clearfix">
-      <button type="button" onclick="document.getElementById('id03').style.display='none'" class="cancelbtn">Cancel</button>
+      <button type="button" onclick="document.getElementById('taskAdd').style.display='none'" class="cancelbtn">Cancel</button>
     </div>
   </div>
   </form>
 </div>
 
-  <div id="air" style="width: 500px; height: 400px;"></div>
+<div id="percentage" style="width: 500px; height: 400px;"></div>
 
-<div class="tbl">
-<table align="center">
+<!--Table-->
+
+<div class="tbl" style="position: fixed;">
+<table style="width: fit-content;">
   <caption> Цього тижня </caption>
   <tr>
     <th style="width: 1px"> </th>
     <th> Task </th>
     <th> Time </th>
+    <th>      </th>
   </tr>
   <tr>
     <td style="background-color: red"> </td>
     <td> Unit Tests </td>
     <td> 4 hours </td>
+    <td>
+      <div class="dropdown">
+        <button class="dropbtn" onclick="dropDownFunction()">&vellip; </button>
+        <div id="myDropDown" class="dropdown-content">
+                <a href="#">Add user</a>
+                <a href="#">Get task info</a>
+                <a href="#">Get task users</a>
+                <a href="#">Change status</a>
+              </div>
+        </div>
+    </td>
   </tr>
   <tr>
     <td style="background-color: orange"> </td>
     <td> Dockers </td>
     <td> 2 hours </td>
+    <td>
+      <div class="dropdown">
+        <button class="dropbtn" onclick="dropDownFunction()">&vellip; </button>
+        <div id="myDropDown" class="dropdown-content">
+                <a href="#">Add user</a>
+                <a href="#">Get task info</a>
+                <a href="#">Get task users</a>
+                <a href="#">Change status</a>
+              </div>
+        </div>
+  </td>
   </tr>
-</div>
 </table>
+</div>
+
+<!-- Circle diagram-->
+
   <script src="https://www.google.com/jsapi"></script>
   <script>
   google.load("visualization", "1", {packages:["corechart"]});
@@ -145,10 +199,42 @@ class="close" title="Close Modal">&times;</span>
       is3D: false,
       pieResidueSliceLabel: 'Інші'
      };
-     var chart = new google.visualization.PieChart(document.getElementById('air'));
+     var chart = new google.visualization.PieChart(document.getElementById('percentage'));
       chart.draw(data, options);
     }
     </script>
   <script src="../js/test.js" type="text/javascript"></script>
+  <script src="https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://snipp.ru/cdn/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script>
+    /* Локализация datepicker */
+    $.datepicker.regional['ru'] = {
+      closeText: 'Закрыть',
+      prevText: 'Предыдущий',
+      nextText: 'Следующий',
+      currentText: 'Сегодня',
+      monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+      monthNamesShort: ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'],
+      dayNames: ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'],
+      dayNamesShort: ['вск','пнд','втр','срд','чтв','птн','сбт'],
+      dayNamesMin: ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
+      weekHeader: 'Не',
+      dateFormat: 'dd.mm.yy',
+      firstDay: 1,
+      isRTL: false,
+      showMonthAfterYear: false,
+      yearSuffix: ''
+    };
+    $.datepicker.setDefaults($.datepicker.regional['ru']);
+    
+    $(function(){
+      $("#datepicker").datepicker({
+        onSelect: function(date){
+          $('#datepicker_value').val(date)
+        }
+      });
+      $("#datepicker").datepicker("setDate", $('#datepicker_value').val());
+    });
+    </script>    
   </body>
 </html>
