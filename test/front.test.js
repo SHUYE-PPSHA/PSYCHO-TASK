@@ -60,7 +60,48 @@ describe('frontEnd tests', () => {
         }
     });
 
+    it('account.signUp_invalidEmail', async () => {
+        const acc = {
+            email: 'affafdljl',
+            username: 'sqe',
+            password: '1234',
+            repeatedPassword: '1234',
+        };
+        try {
+            await acc.signUp(acc.email, acc.username, acc.password, acc.repeatedPassword);
+        } catch (e) {
+            assert.equal(e.message, 'Invalid Email');
+        }
+    });
+
+    it('account.signUp_LongEmail', async () => {
+        const acc = {
+            email: 'affafdljlqewirioqreoitioqtyrteioty1234567890@gmail.com',
+            username: 'sqe',
+            password: '1234',
+            repeatedPassword: '1234',
+        };
+        try {
+            await acc.signUp(acc.email, acc.username, acc.password, acc.repeatedPassword);
+        } catch (e) {
+            assert.equal(e.message, 'Long email');
+        }
+    });
     
+    it('account.signUp_LongUsername', async () => {
+        const acc = {
+            email: 'suh@gmail.com',
+            username: 'sqeaffafdljlqewirioqreoitioqtyrteioty1234567890',
+            password: '1234',
+            repeatedPassword: '1234',
+        };
+        try {
+            await acc.signUp(acc.email, acc.username, acc.password, acc.repeatedPassword);
+        } catch (e) {
+            assert.equal(e.message, 'Long username');
+        }
+    });
+
     it('account.login_notStringInput', async () => {
         const acc = {
             email: 'suh@gmail.com',
@@ -110,6 +151,19 @@ describe('frontEnd tests', () => {
             await task.addTask(task.name, task.priority, task.deadline);
         } catch (e) {
             assert.equal(e.message, 'Task is expected to have a name');
+        }
+    });
+	
+    it('task.addTask_LongName', async () => {
+        const task = {
+            name: 'qwertyuiopasdfghjkl;zxcvbnm,mnbvcxzasdfghjkl;;poiuytrewqasdfghjkjhgfddfthgytrfghjutrdcvbk',
+            priority: 4,
+            deadline: '11.06.2021',
+        };
+        try {
+            await task.addTask(task.name, task.priority, task.deadline);
+        } catch (e) {
+            assert.equal(e.message, 'Long task name');
         }
     });
     
