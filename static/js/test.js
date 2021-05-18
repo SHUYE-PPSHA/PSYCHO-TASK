@@ -1,8 +1,6 @@
 'use strict'
 
-
 {
-
   const cases = [
     ['/html/1.html', `<h1>html1</h1>
     <button id="12345">html2</button>`],
@@ -19,10 +17,10 @@
     const [ entering, expected ] = event;
     getData(entering).then(result => {
       if (result.trim() !== expected.trim()) {
-        console.error(`test failed\n
+        console.error(`test failed(getData)\n
                       value: ${entering}\n
                       expected: ${expected}\n
-                      result: ${result}`)
+                      result: ${result}`);
       }
     })
   }
@@ -30,27 +28,28 @@
 }
 
 
-const cases = [
+const events = [
   '../js/nxtpage.js',
   '../js/test.js',
   '../js/smth.js'
 ]
 
-for (const event of cases) {
+for (const event of events) {
   addScript(event);
   const srcArr = document.body.lastChild.src.split('/');
   const srcResult = srcArr[srcArr.length - 1];
   const eventArr = event.split('/');
   const srcEvent = eventArr[eventArr.length - 1];
   if (srcEvent !== srcResult) {
-    console.error('test failed');
+    console.error(`test failed(addScript)\n
+                      value: ${srcResult}\n
+                      expected: ${srcEvent}\n`);
   }
 }
 
-
 {
   removeScripts();
-  if (document.scripts.length !== 1) console.error('test failed');
+  if (document.scripts.length !== 1) console.error('test failed(removeScript)');
 }
 
 {
@@ -67,6 +66,12 @@ for (const event of cases) {
   
   for (const content of contents) {
     changeContent(content);
-    if (document.body.innerHTML.trim() !== content.trim()) console.error('test failed');
+    const result = document.body.innerHTML.trim();
+    if (document.body.innerHTML.trim() !== content.trim()) {
+      console.error(`test failed(getData)\n
+                      expected: ${context}\n
+                      result: ${result}`);
+    }
   }
 }
+

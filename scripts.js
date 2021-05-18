@@ -1,6 +1,6 @@
 module.exports = {
   index: [
-    '../js/another.js'
+    '../js/main.js'
   ],
   1: [
     '../js/another.js',
