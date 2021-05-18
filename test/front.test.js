@@ -8,7 +8,7 @@ describe('frontEnd tests', () => {
         email: 'suh@gmail.com',
         username: 'sqe',
         password: 1234,
-        repeatedPassword: 1224,
+        repeatedPassword: 1234,
       };
       try {
         await acc.signUp(acc.email, acc.username, acc.password, acc.repeatedPassword);
@@ -16,6 +16,21 @@ describe('frontEnd tests', () => {
         assert.equal(e.message, 'Data has a wrong type. Expected string');
       }
     });
+
+    it('account.signUp_wrongRepeatedPassword', async () => {
+      const acc = {
+        email: 'suh@gmail.com',
+        username: 'sqe',
+        password: '1234',
+        repeatedPassword: '1224',
+      };
+      try {
+        await acc.signUp(acc.email, acc.username, acc.password, acc.repeatedPassword);
+      } catch (e) {
+        assert.equal(e.message, 'Data has a wrong repeated password');
+      }
+    });
+
 
     it('account.signUp_AlreadyExist', async () => {
         const acc = {
@@ -88,6 +103,19 @@ describe('frontEnd tests', () => {
     it('task.addTask_NoName', async () => {
         const task = {
             name: '',
+            priority: 4,
+            deadline: '11.06.2021',
+        };
+        try {
+            await task.addTask(task.name, task.priority, task.deadline);
+        } catch (e) {
+            assert.equal(e.message, 'Task is expected to have a name');
+        }
+    });
+    
+    it('task.addTask_NoName', async () => {
+        const task = {
+            name: null,
             priority: 4,
             deadline: '11.06.2021',
         };
