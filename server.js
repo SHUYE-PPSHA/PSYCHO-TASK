@@ -53,6 +53,8 @@ http.createServer(async (req, res) => {
   } catch (err) {
     httpError(res, 404, 'File is not found');
   }
-}).listen(8000);
+}).listen(8000, '0.0.0.0', () => {
+  console.log(`Server running at http://0.0.0.0:8000/`);
+});
 
 module.exports = { getBody };

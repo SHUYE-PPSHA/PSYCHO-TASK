@@ -1,4 +1,4 @@
-INSERT INTO Task_Complexity VALUES
+INSERT INTO Task_Priority VALUES
   (default, 'Низький'),
   (default, 'Середній'),
   (default, 'Високий');

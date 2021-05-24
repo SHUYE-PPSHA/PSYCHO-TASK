@@ -8,7 +8,7 @@ describe('database tests', () => {
   it('User.addUser_notStringInput', async () => {
     const user = {
       user_id: 1,
-      name: 'sqe',
+      name: 'sqwere',
       surname: null,
       password: 2,
       max_working_time: 200
