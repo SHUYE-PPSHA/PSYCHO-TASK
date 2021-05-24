@@ -4,10 +4,10 @@ CREATE TABLE IF NOT EXISTS Public.Task_Status (
   PRIMARY KEY (status_id)
 );
 
-CREATE TABLE IF NOT EXISTS Public.Task_Complexity (
-  complexity_id serial NOT NULL,
+CREATE TABLE IF NOT EXISTS Public.Task_Priority (
+  priority_id serial NOT NULL,
   name varchar NOT NULL,
-  PRIMARY KEY (complexity_id)
+  PRIMARY KEY (priority_id)
 );
 
 CREATE TABLE IF NOT EXISTS Public.Users (
@@ -23,11 +23,11 @@ CREATE TABLE IF NOT EXISTS Public.Tasks (
   task_id serial NOT NULL,
   name varchar NOT NULL,
   description varchar NOT NULL,
-  complexity int NOT NULL,
+  priority int NOT NULL,
   execution_time int NOT NULL,
   status int NOT NULL,
   PRIMARY KEY (task_id),
-  CONSTRAINT Tasks_complexity_foreign FOREIGN KEY (complexity) REFERENCES Public.Task_Complexity (complexity_id),
+  CONSTRAINT Tasks_priority_foreign FOREIGN KEY (priority) REFERENCES Public.Task_Priority (priority_id),
   CONSTRAINT Tasks_status_foreign FOREIGN KEY (status) REFERENCES Public.Task_Status (status_id)
 );
 
