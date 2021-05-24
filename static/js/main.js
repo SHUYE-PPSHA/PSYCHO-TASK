@@ -86,3 +86,45 @@ class task {
 
   async changeTask() {}
 }
+
+const createPostRequestObj = data => ({
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(data),
+});
+
+class User {
+  static async getUserInfo(userId) {
+    const url = '/user/getUserInfo';
+    const requestdata = { userId };
+    const response = await fetch(url, createPostRequestObj(requestdata));
+    const result = await response.json();
+    console.log(result);
+  }
+
+  static async getUsers() {
+    const url = '/user/getUsers';
+    const response = await fetch(url);
+    const result = await response.json();
+    console.log(result);
+  }
+}
+
+class Task {
+  static async getTaskInfo(taskId) {
+    const url = '/task/getTaskInfo';
+    const requestdata = { taskId };
+    const response = await fetch(url, createPostRequestObj(requestdata));
+    const result = await response.json();
+    console.log(result);
+  }
+}
+
+class TaskStatus {
+  static async getStatuses() {
+    const url = '/taskStatus/getStatuses';
+    const response = await fetch(url);
+    const result = await response.json();
+    console.log(result);
+  }
+}
