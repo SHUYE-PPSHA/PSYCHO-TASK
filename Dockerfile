@@ -1,6 +1,7 @@
 FROM node:alpine
 WORKDIR /usr/app/front
-EXPOSE 5000
+COPY package.json ./
+COPY package-lock.json ./
+RUN npm i
 COPY ./ ./
-RUN npm install
-CMD ["npm", "start"]
+CMD [ "npm", "start" ]
