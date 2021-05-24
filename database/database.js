@@ -26,6 +26,14 @@ class User {
   }
 
   async addUser(name, surname, password, maxWorkingTime) {
+    if (
+      typeof name !== 'string' ||
+      typeof surname !== 'string' ||
+      typeof password !== 'string'
+    ) {
+      throw new Error('The values of the variables name, surname, password must be string');
+    }
+
     if (maxWorkingTime < 0) {
       throw new Error('User max working time must be greater than or equal to 0');
     }
@@ -67,8 +75,11 @@ class User {
   }
 
   async setMaxWorkingTime(userId, time) {
-    if (typeof time !== 'number') {
+    if (typeof userId !== 'number' || typeof time !== 'number') {
       throw new Error('Number expected');
+    }
+    if (userId < 1) {
+      throw new Error('User ID must be greater than or equal to 1');
     }
     if (time <= 0) {
       throw new Error('The time spent cannot be less than 0');
@@ -95,6 +106,9 @@ class User {
   }
 
   async joinToTask(userId, taskId, timeSpent) {
+    if ((userId < 1) || (taskId < 1)) {
+      throw new Error('User ID and Task ID must be greater than or equal to 1');
+    }
     if (timeSpent <= 0) {
       throw new Error('The time spent cannot be less than 0');
     }
@@ -115,7 +129,12 @@ class Task {
   }
 
   async getTaskInfo(taskId) {
-    if (!taskId) throw new Error();
+    if (typeof taskId !== 'number') {
+      throw new Error('Number expected');
+    }
+    if (taskId < 1) {
+      throw new Error('User ID must be greater than or equal to 1');
+    }
     try {
       const query = queries['Task.getTaskInfo'];
       const result = await this.pool.query(query, [taskId]);
@@ -149,14 +168,23 @@ class Task {
     }
   }
 
-  async addTask(name, descr, complexity, executionTime, status) {
+  async addTask(name, descr, priority, executionTime, status) {
+    if (typeof name !== 'string' || typeof descr !== 'string') {
+      throw new Error('String expected');
+    }
+    if (!name || !descr) {
+      throw new Error('Not empty string expected');
+    }
+    if ((priority < 1) || (status < 1)) {
+      throw new Error('Task priority ID and Task status ID must be greater than or equal to 1');
+    }
     if (executionTime <= 0) {
       throw new Error('The execution time cannot be less than 0');
     }
 
     try {
       const query = queries['Task.addTask'];
-      const result = await this.pool.query(query, [name, descr, complexity, executionTime, status]);
+      const result = await this.pool.query(query, [name, descr, priority, executionTime, status]);
       console.log(result);
     } catch (error) {
       console.log(error);
@@ -182,6 +210,9 @@ class TaskStatus {
   }
 
   async addNewStatus(name) {
+    if (typeof name !== 'string') {
+      throw new Error('String expected');
+    }
     if (!name) {
       throw new Error('Not empty string expected');
     }
