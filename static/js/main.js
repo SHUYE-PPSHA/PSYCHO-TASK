@@ -4,7 +4,7 @@ function dropDownFunction() {
   document.getElementById('myDropDown').classList.toggle('show');
 }
 
-window.onclick = function(event) {
+/*window.onclick = function(event) {
   if (!event.target.matches('.dropbtn')) {
     var dropdowns = document.getElementsByClassName("dropdown-content");
     var i;
@@ -15,39 +15,25 @@ window.onclick = function(event) {
       }
     }
   }
-}
+}*/
 
 class account {
   
   async signUp(mail, usrName, usrSurName, psswrd, repeatpsswrd) {
-    if ( typeof mail, usrName, usrSurName, psswrd, repeatpsswrd !== 'string') 
+    if ( typeof mail !== 'string' || typeof usrName !== 'string' || typeof usrSurName !== 'string' || typeof psswrd !== 'string' || typeof repeatpsswrd !== 'string') 
     {
       throw new Error('Data has a wrong type');
-    }
-
-    if (accounts.includes(mail || psswrd) === true) 
-    {
-      throw new Error('This account already exist');
-    }
+    } 
 
     if (psswrd !== repeatpsswrd) 
     {
-      throw new Error('Repeated password does not match the password')
+      throw new Error('Data has a wrong repeated password')
     }
-    alert('Work in progress');
-    /*
-    let mail = userMail.nodeValue;
-    let usrName = userName.nodeValue;
-    let usrSurName = userSurname.nodeValue;
-    let psswrd = userPsswrd.nodeValue;
-    let repeatpsswrd = userSecPsswrd.nodeValue;
-    let acc = {mail, usrName, usrSurname, psswrd, repeatpsswrd};
-    let verse = acc;
-    */
+
   }
 
   async login (mail, usr, psswrd) {
-    if (mail, usr, psswrd !== 'string') 
+    if (typeof mail !== 'string' || typeof usr !== 'string' || typeof psswrd !== 'string') 
     {
       throw new Error('String is expected');
     }
@@ -64,8 +50,8 @@ class task {
 
   async addTask(name, descrip, priority, deadline) 
   {
-    if (name, descrip, deadline !== 'string' || priority !== 'number') 
-    {
+    if (typeof name !== 'string' || typeof descrip !== 'string' || typeof deadline !== 'string' || typeof priority !== 'number') 
+    { 
       throw new Error('Different types of input are expected');
     }
 
@@ -83,8 +69,6 @@ class task {
       throw new Error('Deadline can not be earlier than today');
     }
   }
-
-  async changeTask() {}
 }
 
 const createPostRequestObj = data => ({
@@ -128,3 +112,15 @@ class TaskStatus {
     console.log(result);
   }
 }
+//const arrObj = Task.getTaskInfo($1);
+
+class App {
+  constructor(){
+  this.account = new account();
+  this.task = new task();
+  this.user = new User();
+  this.taskStatus = new TaskStatus();
+  }
+}
+
+module.exports = { App };

@@ -23,8 +23,7 @@ describe('frontEnd tests', () => {
     it('account.signUp_wrongRepeatedPassword', async () => {
       const acc = {
         email: 'suh@gmail.com',
-        usrname: 'sqe',
-        usrSurName: 'fsf',
+        username: 'sqe',
         password: '1234',
         repeatedPassword: '1224',
       };
@@ -34,7 +33,7 @@ describe('frontEnd tests', () => {
         assert.equal(error.message, 'Data has a wrong repeated password');
       }
     });
-
+/* 
     it('account.signUp_ReapetpsswrdWrongInput', async () => {
         const acc = {
             email: 'suh@gmail.com',
@@ -62,7 +61,7 @@ describe('frontEnd tests', () => {
             assert.equal(e.message, 'Invalid Email');
         }
     });
-
+*/
     it('account.signUp_LongEmail', async () => {
         const acc = {
             email: 'affafdljlqewirioqreoitioqtyrteioty1234567890@gmail.com',
@@ -94,7 +93,7 @@ describe('frontEnd tests', () => {
     it('account.login_notStringInput', async () => {
         const acc = {
             email: 'suh@gmail.com',
-            username: sqe,
+            username: 'sqe',
             password: 12344,
         };
         try {
@@ -119,8 +118,8 @@ describe('frontEnd tests', () => {
     
     it('task.addTask_WrongTypeInput', async () => {
         const tassk = {
-            name: tests,
-            priority: '4',
+            name: 'tests',
+            priority: 4,
             deadline: '11.06.2021',
         };
         try {

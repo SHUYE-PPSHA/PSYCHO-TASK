@@ -31,5 +31,3 @@ for (const html of htmlf) {
     }
   });
 }
-
-

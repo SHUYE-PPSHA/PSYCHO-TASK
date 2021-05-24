@@ -9,7 +9,7 @@
     <script src = "../js/main.js" type = "text/javascript"></script>
   </head>
   </header>
-  <body background="src=">
+  <body>
 
   <div class="topnav">
     <a class="active" href="#home">Home</a>
@@ -123,7 +123,7 @@ class="close" title="Close Modal">&times;</span>
       <label for="pswAdd"><b>Deadline</b></label>
       <input type="dateAdd" placeholder="Enter a date" name="pswAdd" required>
 
-      <button type="submitAdd">Create</button>
+      <button type="submitAdd" onclick="alert('Task was added')">Create</button>
 
     <div class="clearfix">
       <button type="button" onclick="document.getElementById('taskAdd').style.display='none'" class="cancelbtn">Cancel</button>
@@ -231,22 +231,23 @@ class="close" title="Close Modal">&times;</span>
       });
       $("#datepicker").datepicker("setDate", $('#datepicker_value').val());
     });
-    </script>     
-      <script> 
-        arrObj = [
+    </script>
+    <script>
+      let arrObj = [
       {'name' : 'task1', 'priority' : 'high', 'executionTime' : '20 min', 'status' : 'in progress'},
       {'name' : 'task2', 'priority' : 'normal', 'executionTime': '1.5 hour', 'status': 'hiatus'},
       {'name' : 'task3', 'priority' : 'low', 'executionTime' : 'infinity', 'status' : 'tested'}
       ]
-      
-      //const arrObj = getData('./taskTable');
-
-      tasks_table = document.getElementById('tasks_table');
+     
+    //const arrObj = Task.getTaskInfo($2);
+    
+     tasks_table = document.getElementById('tasks_table');
       for (let i = 0; i < 5; i++) {
         tasks_table.innerHTML += '<tr><td>' + arrObj[i].name + '</td><td>' + arrObj[i].priority
       + '</td><td>' + arrObj[i].executionTime + '</td><td>' + arrObj[i].status +  
-     '<td> <div class="dropdown"> <button class="dropbtn" onclick="dropDownFunction()">&vellip; </button> <div id="myDropDown" class="dropdown-content"> <a href="#">Add user</a> <a href="#">Get task info</a> <a href="#">Get task users</a> <a href="#">Change status</a> </div> </div> </td>' + '</td></tr>';
+      '<td> <div class="dropdown"> <button class="dropbtn" onclick="dropDownFunction()">&vellip; </button> <div id="myDropDown" class="dropdown-content"> <a href="#">Add user</a> <a href="#">Get task info</a> <a href="#">Get task users</a> <a href="#">Change status</a> </div> </div> </td>' + '</td></tr>';
       }
+
   </script>
   </body>
 </html>
