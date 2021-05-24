@@ -1,7 +1,16 @@
-FROM node:alpine
-WORKDIR /usr/app/front
-COPY package.json ./
-COPY package-lock.json ./
-RUN npm i
-COPY ./ ./
+FROM node:14.15.4 as base
+
+WORKDIR /code
+
+COPY package.json package.json
+COPY package-lock.json package-lock.json
+
+FROM base as test
+RUN npm ci
+COPY . .
+CMD [ "npm", "run", "test" ]
+
+FROM base as prod
+RUN npm ci --production
+COPY . .
 CMD [ "npm", "start" ]
