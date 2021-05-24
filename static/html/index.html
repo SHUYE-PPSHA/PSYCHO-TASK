@@ -136,24 +136,24 @@ class="close" title="Close Modal">&times;</span>
 
 <!--Table-->
 
-<div class="tbl" style="position: fixed;">
-<table style="width: fit-content;">
-  <caption> Цього тижня </caption>
+<form class="tbl" style="position: fixed">
+<table id = "tasks_table" style="border: 1">
+  <tr><th colspan="5"> Цього тижня </th></tr>
   <tr>
-    <th style="width: 1px"> </th>
-    <th> Task </th>
-    <th> Time </th>
-    <th>      </th>
+    <th> Name </th>
+    <th> Priority </th>
+    <th> Excution time </th>
+    <th> Status </th>
+    <th> </th>
   </tr>
+
+ <!--
   <tr>
-    <td style="background-color: red"> </td>
-    <td> Unit Tests </td>
-    <td> 4 hours </td>
     <td>
       <div class="dropdown">
         <button class="dropbtn" onclick="dropDownFunction()">&vellip; </button>
         <div id="myDropDown" class="dropdown-content">
-                <a href="#">Add user</a>
+                <a href="#" onclick="add_user()">Add user</a>
                 <a href="#">Get task info</a>
                 <a href="#">Get task users</a>
                 <a href="#">Change status</a>
@@ -162,9 +162,6 @@ class="close" title="Close Modal">&times;</span>
     </td>
   </tr>
   <tr>
-    <td style="background-color: orange"> </td>
-    <td> Dockers </td>
-    <td> 2 hours </td>
     <td>
       <div class="dropdown">
         <button class="dropbtn" onclick="dropDownFunction()">&vellip; </button>
@@ -177,8 +174,9 @@ class="close" title="Close Modal">&times;</span>
         </div>
   </td>
   </tr>
+-->
 </table>
-</div>
+</form>
 
 <!-- Circle diagram-->
 
@@ -215,7 +213,6 @@ class="close" title="Close Modal">&times;</span>
       monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
       monthNamesShort: ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'],
       dayNames: ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'],
-      dayNamesShort: ['вск','пнд','втр','срд','чтв','птн','сбт'],
       dayNamesMin: ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
       weekHeader: 'Не',
       dateFormat: 'dd.mm.yy',
@@ -234,6 +231,22 @@ class="close" title="Close Modal">&times;</span>
       });
       $("#datepicker").datepicker("setDate", $('#datepicker_value').val());
     });
-    </script>    
+    </script>     
+      <script> 
+        arrObj = [
+      {'name' : 'task1', 'priority' : 'high', 'executionTime' : '20 min', 'status' : 'in progress'},
+      {'name' : 'task2', 'priority' : 'normal', 'executionTime': '1.5 hour', 'status': 'hiatus'},
+      {'name' : 'task3', 'priority' : 'low', 'executionTime' : 'infinity', 'status' : 'tested'}
+      ]
+      
+      //const arrObj = getData('./taskTable');
+
+      tasks_table = document.getElementById('tasks_table');
+      for (let i = 0; i < 5; i++) {
+        tasks_table.innerHTML += '<tr><td>' + arrObj[i].name + '</td><td>' + arrObj[i].priority
+      + '</td><td>' + arrObj[i].executionTime + '</td><td>' + arrObj[i].status +  
+     '<td> <div class="dropdown"> <button class="dropbtn" onclick="dropDownFunction()">&vellip; </button> <div id="myDropDown" class="dropdown-content"> <a href="#">Add user</a> <a href="#">Get task info</a> <a href="#">Get task users</a> <a href="#">Change status</a> </div> </div> </td>' + '</td></tr>';
+      }
+  </script>
   </body>
 </html>
