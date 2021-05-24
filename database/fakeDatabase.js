@@ -146,15 +146,15 @@ class Task {
     //TODO
   }
 
-  async addTask(name, descr, complexity, executionTime, status) {
+  async addTask(name, descr, priority, executionTime, status) {
     if (typeof name !== 'string' || typeof descr !== 'string') {
       throw new Error('String expected');
     }
     if (!name || !descr) {
       throw new Error('Not empty string expected');
     }
-    if ((complexity < 1) || (status < 1)) {
-      throw new Error('Task complexity ID and Task status ID must be greater than or equal to 1');
+    if ((priority < 1) || (status < 1)) {
+      throw new Error('Task priority ID and Task status ID must be greater than or equal to 1');
     }
     if (executionTime <= 0) {
       throw new Error('The execution time cannot be less than 0');
@@ -163,7 +163,7 @@ class Task {
     this.tasksTable.set(this.currentTaskId, { task_id: this.currentTaskId,
       name,
       description: descr,
-      complexity,
+      priority,
       execution_time: executionTime,
       status });
   }
