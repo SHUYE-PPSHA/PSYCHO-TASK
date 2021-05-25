@@ -23,7 +23,8 @@ describe('frontEnd tests', () => {
     it('account.signUp_wrongRepeatedPassword', async () => {
       const acc = {
         email: 'suh@gmail.com',
-        username: 'sqe',
+        usrname: 'sqe',
+        usrSurName: 'fsf',
         password: '1234',
         repeatedPassword: '1224',
       };
@@ -33,7 +34,7 @@ describe('frontEnd tests', () => {
         assert.equal(error.message, 'Data has a wrong repeated password');
       }
     });
-/* 
+
     it('account.signUp_ReapetpsswrdWrongInput', async () => {
         const acc = {
             email: 'suh@gmail.com',
@@ -61,16 +62,17 @@ describe('frontEnd tests', () => {
             assert.equal(e.message, 'Invalid Email');
         }
     });
-*/
+
     it('account.signUp_LongEmail', async () => {
         const acc = {
             email: 'affafdljlqewirioqreoitioqtyrteioty1234567890@gmail.com',
-            username: 'sqe',
+            usrname: 'sqe',
+            usrSurName: 'fsf',
             password: '1234',
             repeatedPassword: '1234',
         };
         try {
-            await app1.account.signUp(acc.email, acc.username, acc.password, acc.repeatedPassword);
+            await app1.account.signUp(acc.email, acc.usrname, acc.usrSurName, acc.password, acc.repeatedPassword);
         } catch (e) {
             assert.equal(e.message, 'Long email');
         }
@@ -79,14 +81,15 @@ describe('frontEnd tests', () => {
     it('account.signUp_LongUsername', async () => {
         const acc = {
             email: 'suh@gmail.com',
-            username: 'sqeaffafdljlqewirioqreoitioqtyrteioty1234567890',
+            usrname: 'sqeggrgrdgsegfeagsehsr',
+            usrSurName: 'fsfggrgswgeahhsrhse',
             password: '1234',
             repeatedPassword: '1234',
         };
         try {
-            await app1.account.signUp(acc.email, acc.username, acc.password, acc.repeatedPassword);
+            await app1.account.signUp(acc.email, acc.usrname, acc.usrSurName, acc.password, acc.repeatedPassword);
         } catch (e) {
-            assert.equal(e.message, 'Long username');
+            assert.equal(e.message, 'Long name or surname');
         }
     });
 
@@ -119,39 +122,14 @@ describe('frontEnd tests', () => {
     it('task.addTask_WrongTypeInput', async () => {
         const tassk = {
             name: 'tests',
+            descrip: 'fwefsgf',
             priority: 4,
             deadline: '11.06.2021',
         };
         try {
-            await app1.task.addTask(tassk.name, tassk.priority, tassk.deadline);
+            await app1.task.addTask(tassk.name, tassk.descrip, tassk.priority, tassk.deadline);
         } catch (e) {
             assert.equal(e.message, 'Different types of input are expected');
-        }
-    });
-    
-    it('task.addTask_NoName', async () => {
-        const tassk = {
-            name: '',
-            priority: 4,
-            deadline: '11.06.2021',
-        };
-        try {
-            await app1.task.addTask(tassk.name, tassk.priority, tassk.deadline);
-        } catch (e) {
-            assert.equal(e.message, 'Task is expected to have a name');
-        }
-    });
-	
-    it('task.addTask_LongName', async () => {
-        const tassk = {
-            name: 'qwertyuiopasdfghjkl;zxcvbnm,mnbvcxzasdfghjkl;;poiuytrewqasdfghjkjhgfddfthgytrfghjutrdcvbk',
-            priority: 4,
-            deadline: '11.06.2021',
-        };
-        try {
-            await app1.task.addTask(tassk.name, tassk.priority, tassk.deadline);
-        } catch (e) {
-            assert.equal(e.message, 'Long task name');
         }
     });
     
@@ -162,7 +140,34 @@ describe('frontEnd tests', () => {
             deadline: '11.06.2021',
         };
         try {
-            await app1.task.addTask(tassk.name, tassk.priority, tassk.deadline);
+            await app1.task.addTask(tassk.name, tassk.descrip, tassk.priority, tassk.deadline);
+        } catch (e) {
+            assert.equal(e.message, 'Task is expected to have a name');
+        }
+    });
+	
+    it('task.addTask_LongName', async () => {
+        const tassk = {
+            name: 'qwertyuiopasdfghjkl;zxcvbnm,mnbvcxzasdfghjklpoiuytrewqasdfghjkjhgfddfthgytrfghjutrdcvbk',
+            priority: 4,
+            deadline: '11.06.2021',
+        };
+        try {
+            await app1.task.addTask(tassk.name, tassk.descrip, tassk.priority, tassk.deadline);
+        } catch (e) {
+            assert.equal(e.message, 'Long task name');
+        }
+    });
+    
+    it('task.addTask_NoName', async () => {
+        const tassk = {
+            name: null,
+            descrip: 'fwefsgf',
+            priority: 4,
+            deadline: '11.06.2021',
+        };
+        try {
+            await app1.task.addTask(tassk.name, tassk.descrip, tassk.priority, tassk.deadline);
         } catch (e) {
             assert.equal(e.message, 'Task is expected to have a name');
         }
@@ -171,11 +176,12 @@ describe('frontEnd tests', () => {
     it('task.addTask_OutOfRange', async () => {
         const tassk = {
             name: 'tests',
+            descrip: 'fwefsgf',
             priority: 424,
             deadline: '11.06.2021',
         };
         try {
-            await app1.task.addTask(tassk.name, tassk.priority, tassk.deadline);
+            await app1.task.addTask(tassk.name, tassk.descrip, tassk.priority, tassk.deadline);
         } catch (e) {
             assert.equal(e.message, 'Priority number is out of range');
         }
@@ -184,11 +190,12 @@ describe('frontEnd tests', () => {
     it('task.addTask_UnexpectedDeadline', async () => {
         const tassk = {
             name: 'tests',
+            descrip: 'fwefsgf',
             priority: 4,
             deadline: '11.01.2019',
         };
         try {
-            await app1.task.addTask(tassk.name, tassk.priority, tassk.deadline);
+            await app1.task.addTask(tassk.name, tassk.descrip, tassk.priority, tassk.deadline);
         } catch (e) {
             assert.equal(e.message, 'Deadline can not be earlier than today');
         }
