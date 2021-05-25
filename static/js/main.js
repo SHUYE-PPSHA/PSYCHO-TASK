@@ -19,26 +19,26 @@ function dropDownFunction() {
 
 class account {
   
-  async signUp(mail, usrName, usrSurName, psswrd, repeatpsswrd) {
-    if ( typeof mail !== 'string' || typeof usrName !== 'string' || typeof usrSurName !== 'string' || typeof psswrd !== 'string' || typeof repeatpsswrd !== 'string') 
+  async signUp(mail, name, surname, password, repeatpassword) {
+    if ( typeof mail !== 'string' || typeof name !== 'string' || typeof surname !== 'string' || typeof password !== 'string' || typeof repeatpassword !== 'string') 
     {
       throw new Error('Data has a wrong type');
     } 
 
-    if (psswrd !== repeatpsswrd) 
+    if (password !== repeatpassword) 
     {
       throw new Error('Data has a wrong repeated password')
     }
 
   }
 
-  async login (mail, usr, psswrd) {
-    if (typeof mail !== 'string' || typeof usr !== 'string' || typeof psswrd !== 'string') 
+  async login (mail, user, password) {
+    if (typeof mail !== 'string' || typeof user !== 'string' || typeof password !== 'string') 
     {
       throw new Error('String is expected');
     }
 
-    if (accounts.includes(mail || usr || psswrd) !== true) 
+    if (!mail || !user || !password ) 
     {
       throw new Error('The account does not exist');
     }

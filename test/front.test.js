@@ -8,13 +8,13 @@ describe('frontEnd tests', () => {
     it('account.signUp_wrongTypeOfInput', async () => {
       const acc = {
         email: 'suh@gmail.com',
-        usrname: 'sqe',
-        usrSurName: 'fsf',
+        name: 'sqe',
+        surname: 'fsf',
         password: 1234,
         repeatedPassword: 1234,
       };
       try {
-        await app1.account.signUp(acc.email, acc.usrname, acc.usrSurName, acc.password, acc.repeatedPassword);
+        await app1.account.signUp(acc.email, acc.name, acc.surname, acc.password, acc.repeatedPassword);
       } catch (error) {
         assert.equal(error.message, 'Data has a wrong type');
       }
@@ -23,41 +23,43 @@ describe('frontEnd tests', () => {
     it('account.signUp_wrongRepeatedPassword', async () => {
       const acc = {
         email: 'suh@gmail.com',
-        usrname: 'sqe',
-        usrSurName: 'fsf',
+        name: 'sqe',
+        surname: 'fsf',
         password: '1234',
         repeatedPassword: '1224',
       };
       try {
-        await app1.account.signUp(acc.email, acc.usrname, acc.usrSurName, acc.password, acc.repeatedPassword);
+        await app1.account.signUp(acc.email, acc.name, acc.surname, acc.password, acc.repeatedPassword);
       } catch (error) {
         assert.equal(error.message, 'Data has a wrong repeated password');
       }
     });
 
-    it('account.signUp_ReapetpsswrdWrongInput', async () => {
+    it('account.signUp_RepeatpasswordWrongInput', async () => {
         const acc = {
             email: 'suh@gmail.com',
-            username: 'sqe',
+            name: 'sqe',
+        surname: 'fsf',
             password: '123444242',
             repeatedPassword: '142532521',
         };
         try {
-            await app1.account.signUp(acc.email, acc.username, acc.password, acc.repeatedPassword);
+            await app1.account.signUp(acc.email, acc.name, acc.surname, acc.password, acc.repeatedPassword);
         } catch (e) {
-            assert.equal(e.message, 'Repeated password does not match the password');
+            assert.equal(e.message, 'Data has a wrong repeated password');
         }
     });
 
     it('account.signUp_invalidEmail', async () => {
         const acc = {
             email: 'affafdljl',
-            username: 'sqe',
+            name: 'sqe',
+            surname: 'fsf',
             password: '1234',
             repeatedPassword: '1234',
         };
         try {
-            await app1.account.signUp(acc.email, acc.username, acc.password, acc.repeatedPassword);
+            await app1.account.signUp(acc.email, acc.name, acc.surname, acc.password, acc.repeatedPassword);
         } catch (e) {
             assert.equal(e.message, 'Invalid Email');
         }
@@ -66,28 +68,28 @@ describe('frontEnd tests', () => {
     it('account.signUp_LongEmail', async () => {
         const acc = {
             email: 'affafdljlqewirioqreoitioqtyrteioty1234567890@gmail.com',
-            usrname: 'sqe',
-            usrSurName: 'fsf',
+            name: 'sqe',
+            surname: 'fsf',
             password: '1234',
             repeatedPassword: '1234',
         };
         try {
-            await app1.account.signUp(acc.email, acc.usrname, acc.usrSurName, acc.password, acc.repeatedPassword);
+            await app1.account.signUp(acc.email,acc.name, acc.surname, acc.password, acc.repeatedPassword);
         } catch (e) {
             assert.equal(e.message, 'Long email');
         }
     });
     
-    it('account.signUp_LongUsername', async () => {
+    it('account.signUp_Long_name_surname', async () => {
         const acc = {
             email: 'suh@gmail.com',
-            usrname: 'sqeggrgrdgsegfeagsehsr',
-            usrSurName: 'fsfggrgswgeahhsrhse',
+            name: 'sqeggrgrdgsegfeagsehsr',
+            surname: 'fsfggrgswgeahhsrhse',
             password: '1234',
             repeatedPassword: '1234',
         };
         try {
-            await app1.account.signUp(acc.email, acc.usrname, acc.usrSurName, acc.password, acc.repeatedPassword);
+            await app1.account.signUp(acc.email, acc.name, acc.surname, acc.password, acc.repeatedPassword);
         } catch (e) {
             assert.equal(e.message, 'Long name or surname');
         }
@@ -108,9 +110,9 @@ describe('frontEnd tests', () => {
     
     it('account.login_NotExist', async () => {
         const acc = {
-            email: 'suh@gmail.com',
-            username: 'sqe',
-            password: '123444242',
+            email: '',
+            username: '',
+            password: '',
         };
         try {
             await app1.account.login(acc.email, acc.username, acc.password);
@@ -135,7 +137,8 @@ describe('frontEnd tests', () => {
     
     it('task.addTask_NoName', async () => {
         const tassk = {
-            name: null,
+            name: '',
+            descrip: 'fwefsgf',
             priority: 4,
             deadline: '11.06.2021',
         };
@@ -149,6 +152,7 @@ describe('frontEnd tests', () => {
     it('task.addTask_LongName', async () => {
         const tassk = {
             name: 'qwertyuiopasdfghjkl;zxcvbnm,mnbvcxzasdfghjklpoiuytrewqasdfghjkjhgfddfthgytrfghjutrdcvbk',
+            descrip: 'fwefsgf',
             priority: 4,
             deadline: '11.06.2021',
         };
@@ -161,7 +165,7 @@ describe('frontEnd tests', () => {
     
     it('task.addTask_NoName', async () => {
         const tassk = {
-            name: null,
+            name: '',
             descrip: 'fwefsgf',
             priority: 4,
             deadline: '11.06.2021',
