@@ -17,6 +17,8 @@ jobs:
       run: npm i
         
     - name: Running tests
-      run: npm run test
+      run: |
+        npm run test
+        killall node
     
 # Controls when the action will run. 
