@@ -13,11 +13,6 @@ jobs:
     - name: Clonning repo
       uses: actions/checkout@v1
       
-    - name: Initializing database
-      run: |
-        sudo -u postgres psql
-        \i ./databaseInitialization.sql
-      
     - name: npm installation
       run: npm i
       
