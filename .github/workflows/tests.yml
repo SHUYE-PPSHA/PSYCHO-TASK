@@ -16,6 +16,12 @@ jobs:
     - name: npm installation
       run: npm i
       
+    - name: Database installation & initializing
+      run: |
+        sudo apt-get -y install postgresql
+        sudo -u postgres psql
+        \i ./database/database_resourses/databaseInitialization.sql
+        
     - name: Running tests
       run: npm run test
     
