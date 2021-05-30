@@ -1,0 +1,22 @@
+#--------------------------------------------------------------
+# Automatic testing for Psycho task project
+#--------------------------------------------------------------
+
+name: PSYCHO_TASK_TESTS
+
+on: [push, pull_request]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Clonning repo
+      uses: actions/checkout@v1
+      
+    - name: npm installation
+      run: npm i
+      
+    - name: Running tests
+      run: npm run test
+    
+# Controls when the action will run. 
