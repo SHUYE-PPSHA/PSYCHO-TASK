@@ -9,7 +9,7 @@ on:
       - main
 
 env:
-  IMAGE_NAME: PSYCHO-TASK
+  IMAGE_NAME: psycho-task
   VERSION: latest
 
 jobs:
