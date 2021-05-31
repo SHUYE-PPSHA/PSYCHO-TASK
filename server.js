@@ -31,7 +31,7 @@ const httpError = (res, status, message) => {
 
 console.log(scripts);
 
-http.createServer(async (req, res) => {
+const server = http.createServer(async (req, res) => {
   const url = req.url === '/' ? '/html/index.html' : req.url;
   console.log(url);
 
@@ -69,4 +69,4 @@ http.createServer(async (req, res) => {
   console.log(`Server running at http://0.0.0.0:${PORT}/`);
 });
 
-module.exports = { getBody };
+module.exports = { getBody, server };

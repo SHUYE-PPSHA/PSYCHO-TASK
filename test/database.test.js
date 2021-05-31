@@ -195,7 +195,7 @@ describe('database tests', () => {
       task_id: 1,
       name: 'qdwd',
       description: 'descrd',
-      complexity: 1,
+      priority: 1,
       execution_time: 1200,
       status: 1
     };
@@ -203,7 +203,7 @@ describe('database tests', () => {
     try {
       await fakeDatabase.task.addTask(task.name,
         task.description,
-        task.complexity,
+        task.priority,
         task.execution_time,
         task.status);
       const actualData = fakeDatabase.task.tasksTable.get(task.task_id);
@@ -220,7 +220,7 @@ describe('database tests', () => {
       task_id: 1,
       name: '',
       description: 'descrd',
-      complexity: 1,
+      priority: 1,
       execution_time: 1200,
       status: 1
     };
@@ -228,7 +228,7 @@ describe('database tests', () => {
     try {
       await fakeDatabase.task.addTask(task.name,
         task.description,
-        task.complexity,
+        task.priority,
         task.execution_time,
         task.status);
       const actualData = fakeDatabase.task.tasksTable.get(task.task_id);
