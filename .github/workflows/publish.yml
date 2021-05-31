@@ -9,7 +9,7 @@ on:
       - main
 
 env:
-  IMAGE_NAME: psycho-task
+  IMAGE_NAME: docker.pkg.github.com/shuye-ppsha/psycho-task/psycho-task
   VERSION: latest
 
 jobs:
